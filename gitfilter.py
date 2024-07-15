@@ -52,10 +52,11 @@ class GitFilterService:
     def git_filter_allow(self, rel_filepath):
         # windows convert path string from \\ to /
         file_path_linux = str(rel_filepath).replace("\\","/")
-        # apply the git ignore lines to the file path
-        spec = pathspec.PathSpec.from_lines("gitwildmatch", self.git_ignore_rules)
-        if spec.match_file(file_path_linux):
-            return False
+        # apply the git ignore lines to the file path, if there is a gitignore
+        if self.git_ignore_rules is not None:
+            spec = pathspec.PathSpec.from_lines("gitwildmatch", self.git_ignore_rules)
+            if spec.match_file(file_path_linux):
+                return False
         # check to see if the file has a valid file extension
         if "." in file_path_linux:
             file_extension = "." + file_path_linux.rsplit(".", maxsplit=1)[-1]

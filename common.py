@@ -56,7 +56,7 @@ class FileContent:
     # returns a string that contains the file's comments information
     def score_message(self):
         # init scores for file
-        warnings = exceptions = todos = incompletes = deprecations =0
+        warnings = exceptions = todos = 0
         critical_comment_count = 0
 
         # count critical label occurrences
@@ -67,25 +67,17 @@ class FileContent:
                 exceptions += 1
             if com.labelId == labelMap["todo"]:
                 todos += 1
-            if com.labelId == labelMap["incomplete"]:
-                incompletes += 1
-            if com.labelId == labelMap["deprecation"]:
-                deprecations += 1
 
-        critical_comment_count = warnings + exceptions + todos + incompletes + deprecations
+        critical_comment_count = warnings + exceptions + todos
 
         # if there are lines, and there is at least one critical comment
         if(self.num_lines > 0 and critical_comment_count > 0):
             dataline = ''
             if warnings > 0:
                 dataline += ('\033[91m' + 'warnings: {} ' +  '\033[0m').format(warnings)
-            if incompletes > 0:
-                dataline += ('\033[92m' + 'incompletes: {} ' +  '\033[0m').format(incompletes)
             if exceptions > 0:
                 dataline += ('\033[93m' + 'exceptions: {} ' +  '\033[0m').format(exceptions)
             if todos > 0:
                 dataline += ('\033[94m' + 'todos: {} ' +  '\033[0m').format(todos)
-            if deprecations > 0:
-                dataline += ('\033[95m' + 'deprecations: {}' +  '\033[0m').format(deprecations)
             return dataline
         return None

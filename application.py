@@ -7,7 +7,7 @@ import gitfilter as gfs
 # Application of the model to a coding project
 
 # directory const for project input, the model you want to use, and the vocab file made alongside the model
-INPUT_DIRECTORY = lib.INSTALLATION_DIRECTORY + "\\src code\\roslyn-main"
+INPUT_DIRECTORY = lib.INSTALLATION_DIRECTORY + "\\src"
 MODEL_FILEPATH = lib.INSTALLATION_DIRECTORY + "\\model\\model_825_3699.pth"
 VOCAB_FILEPATH = lib.INSTALLATION_DIRECTORY + "\\embedding\\vocab.pkl"
 
@@ -107,7 +107,7 @@ for root, dirs, files in os.walk(INPUT_DIRECTORY):
                     new_comment = lib.Comment(lineNumber, filename, lib.cleanComment(comment))
                     new_comment.labelId = predict(new_comment.comment, text_pipeline) # label the comment
                     new_comment.label = lib.commentLabel[new_comment.labelId]
-                    new_file.addComment(new_comment)
+                    new_file.add_comment(new_comment)
                 elif comment_block_flag:
                     comment = comment + " " + line
                 else:
@@ -117,7 +117,7 @@ for root, dirs, files in os.walk(INPUT_DIRECTORY):
                         new_comment = lib.Comment(lineNumber, filename, lib.cleanComment(comment))
                         new_comment.labelId = predict(new_comment.comment, text_pipeline) # label the comment
                         new_comment.label = lib.commentLabel[new_comment.labelId]
-                        new_file.addComment(new_comment)
+                        new_file.add_comment(new_comment)
                         comment = ""
 
             # add file with comments to full list of files
