@@ -10,6 +10,15 @@ Project tested with C# code.
 
 git clone https://github.com/AvidProlix/CodeCommentClassifier
 
+## Quickstart
+
+Place the files you want to classify into the /src directory
+execute the application.py script
+
+```PS> py .\application.py```
+
+![alt text](https://github.com/AvidProlix/CodeCommentClassifier/blob/main/example.PNG?raw=true)
+
 ## Usage
 
 This app is broken up into a few different pieces that each execute separately and can use their own data. The steps are as follows: extract data from program files in order to later label them, training the model with the labeled data, applying the trained model to your target coding project.
